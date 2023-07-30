@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script>
+        function getDetails(){
+            var cityname=document.getElementById("city").value;
+            const url=
+            "https://api.openweathermap.org/data/2.5/weather?q="+
+            cityname+
+            "&units=metric&appid=7b7681a062969b9c013ed875b765170a";
+            fetch(url)
+            .then((res)=> res.json())
+            .then((data)=> {
+                console.log(data.main.temp);
+                var temp=data.main.temp;
+                
+                document.getElementById("currentWeather").innerText=temp + data.weather[0].description;
+            });
+            
+        }
+    </script>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            background-color: #efefef;
+        }
+        .container
+        {
+              margin-left:auto;
+              margin-right: auto;
+              margin-top: 15%;
+              width: 500px;
+              height:400px;
+              padding:50px;
+              background-color: white;
+        }
+        #city{
+            width:300px;
+            border:1px solid dodgerblue;
+            height:30px;
+            border-radius: 10px;
+        }
+        .weather
+    {
+        margin-top:50px;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+    .action
+    {
+        background-color: dodgerblue;
+        width:200px;
+        height:30px;
+        border-radius: 10px;
+        border:none;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+         Enter City Name:  <input type="text" id="city" placeholder="Enter City"> 
+    <div id="weather ">
+        <img src="cloudy.png" width="100px" height="100px">
+    <div class="text-center">
+       <h2 id="currentWeather">Current weather</h2>
+    </div>
+    
+    <button class="action" onclick="getDetails()">Get Details</button>
+
+    </div>
+    </div>
+</body>
+</html>
